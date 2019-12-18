@@ -10,6 +10,8 @@
 namespace Hubspot_Feed\Processor;
 
 
+use Hubspot_Feed\Object\Post;
+
 class Xml_To_Json_Converter {
 
 	protected $xml_string = '';
@@ -31,28 +33,31 @@ class Xml_To_Json_Converter {
 	 * @throws \InvalidArgumentException if XML cannot be parsed.
 	 */
 	public function convert(): string {
-		$xml = simplexml_load_string( $this->xml_string );
-
-		if ( ! $xml ) {
-			throw new \InvalidArgumentException( 'XML parsing error' );
+		try {
+			$xml = simplexml_load_string( $this->xml_string );
+		} catch ( \Exception $e ) {
+			throw new \InvalidArgumentException( sprintf( 'Invalid XML: %s', $e->getMessage() ) );
 		}
 
-		return '';
+		$result = [];
+
+		if ( ! $xml->channel->item ) {
+			return json_encode( $result );
+		}
+
+
+		foreach ( $xml->channel->item as $item ) {
+			$post = new Post(
+				$item->title,
+				$item->description,
+				$item->link,
+				$item->pubDate
+			);
+
+			$result[] = $post;
+		}
+
+
+		return json_encode( $result );
 	}
-
-	/**
-	 * Returns fields to utilize;
-	 *
-	 * @return array
-	 */
-	private function transpose_fields() {
-		return [
-			'title',
-			'link',
-			'description',
-			'dc:date'
-		];
-	}
-
-
 }
