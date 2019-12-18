@@ -39,8 +39,13 @@ class Hubspot_Feed_Activator {
 	}
 
 	protected static function schedule_cron() {
+
+		$gmt = new DateTimeZone( 'GMT' );
+
+		$next_tuesday_evening = DateTime::createFromFormat( 'D H:i:s', 'Wed 01:00:00', $gmt );
+
 		if ( ! wp_next_scheduled( 'hubspot_feed_update' ) ) {
-			wp_schedule_event( time(), 'daily', 'hubspot_feed_update' );
+			wp_schedule_event( $next_tuesday_evening->format( 'U' ), 'daily', 'hubspot_feed_update' );
 		}
 	}
 

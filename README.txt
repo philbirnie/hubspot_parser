@@ -12,7 +12,7 @@ Pulls in Hubspot Information
 
 == Description ==
 
-Parses thorugh a range of XML feeds and aggregates/saves for consumption. 
+Parses thorugh a range of XML feeds and aggregates/saves for consumption.
 
 == Frequently Asked Questions ==
 
