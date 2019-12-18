@@ -8,11 +8,11 @@ Stable tag: 5.0
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
-Bridge to pull over magento product information.
+Pulls in Hubspot Information
 
 == Description ==
 
-Bridge to pull over magento product information.
+Parses thorugh a range of XML feeds and aggregates/saves for consumption. 
 
 == Frequently Asked Questions ==
 

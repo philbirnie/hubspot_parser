@@ -19,8 +19,8 @@ use Hubspot_Feed\Processor\Hubspot_Feed_Update;
  * This class defines all code necessary to run during the plugin's activation.
  *
  * @since      1.0.0
- * @package    Magento_Bridge
- * @subpackage Magento_Bridge/includes
+ * @package    Hubspot_Feed
+ * @subpackage Hubspot_Feed/includes
  * @author     Your Name <email@example.com>
  */
 class Hubspot_Feed_Activator {
