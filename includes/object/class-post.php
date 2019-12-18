@@ -29,7 +29,7 @@ class Post {
 	 */
 	public function __construct( string $title, string $description, string $link, string $date ) {
 		$this->title       = $title;
-		$this->description = strip_tags($description, '<em><strong><b><i></i>');
+		$this->description = preg_replace( '/^[\s\n\t\v]+/m', '', strip_tags( $description, '<em><strong><b><i></i>' ) );
 		$this->link        = $link;
 		$this->date        = $this->process_date( $date );
 	}
@@ -51,7 +51,7 @@ class Post {
 		 * Example: Wed, 04 Dec 2019 00:00:00 GMT
 		 */
 		$publish_date = \DateTime::createFromFormat( 'D, d M Y H:i:s e', $date_string );
-		$publish_date->setTimezone($timezone);
+		$publish_date->setTimezone( $timezone );
 
 		return $publish_date->format( 'F j, Y' );
 	}
